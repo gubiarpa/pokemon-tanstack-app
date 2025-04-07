@@ -1,8 +1,9 @@
-import { Card, Placeholder } from 'react-bootstrap';
+import { Card, Placeholder, PlaceholderButton } from 'react-bootstrap';
+import { generateRandomArray } from '../utils/helpers';
 
 export const PokemonLoading = () => {
 	return (
-		<Card style={{ width: '18rem' }}>
+		<Card style={{ width: '10rem' }}>
 			<Card.Body>
 				<Placeholder
 					as={Card.Title}
@@ -14,14 +15,15 @@ export const PokemonLoading = () => {
 					as={Card.Text}
 					animation='glow'
 				>
-					<Placeholder xs={7} />
-					<Placeholder xs={4} />
-					<Placeholder xs={4} />
-					<Placeholder xs={6} />
-					<Placeholder xs={8} />
+					{generateRandomArray(9, 4, 8).map((item, index) => (
+						<Placeholder
+							key={index}
+							xs={item}
+						/>
+					))}
 				</Placeholder>
-				<Placeholder.Button
-					variant='primary'
+				<PlaceholderButton
+					variant='outline-secondary'
 					xs={6}
 				/>
 			</Card.Body>

@@ -33,8 +33,13 @@ export const PokemonItem = ({ className, pokemon }: Props) => {
 			<Card.Body>
 				<Card.Title>{toProperCase(pokemonItem.name)}</Card.Title>
 				<Card.Text className='d-flex flex-wrap gap-1'>
-					{pokemonItem.types.map((type) => (
-						<Badge bg='secondary'>{type.type.name}</Badge>
+					{pokemonItem.types.map(({ type }) => (
+						<Badge
+							key={type.name}
+							bg='secondary'
+						>
+							{type.name}
+						</Badge>
 					))}
 				</Card.Text>
 				<Button variant='outline-secondary'>See details</Button>

@@ -4,10 +4,10 @@ import { getPokemon, getPokemonList } from '../services';
 
 const pokemonListStaletime = Number(import.meta.env.VITE_POKEMON_LIST_STALETIME);
 
-export function usePokemonList() {
+export function usePokemonList(offset: number, limit: number) {
 	return useQuery({
-		queryKey: [queryKeys.POKEMON_LIST],
-		queryFn: () => getPokemonList(),
+		queryKey: [queryKeys.POKEMON_LIST, offset, limit],
+		queryFn: () => getPokemonList(offset, limit),
 		staleTime: pokemonListStaletime,
 	});
 }

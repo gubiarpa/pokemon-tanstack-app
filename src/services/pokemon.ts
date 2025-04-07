@@ -5,9 +5,9 @@ import { PokemonListResponse } from '../types/PokemonList';
 import { Pokemon } from '../types';
 import { delay, getRandomNumber } from '../utils/helpers';
 
-export async function getPokemonList(): Promise<PokemonListResponse> {
+export async function getPokemonList(offset: number, limit: number): Promise<PokemonListResponse> {
 	const url = apiUrl.POKEMON_LIST;
-	const { data } = await apiBase.get<PokemonListResponse>(url);
+	const { data } = await apiBase.get<PokemonListResponse>(`${url}?offset=${offset}&limit=${limit}`);
 	return data;
 }
 
