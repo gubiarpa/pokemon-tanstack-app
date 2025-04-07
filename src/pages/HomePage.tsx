@@ -1,14 +1,9 @@
-import { usePokemonList } from '../hooks/pokemon-list';
+import { PokemonList } from '../components';
 
 export const HomePage = () => {
-	const { isLoading, isError, data } = usePokemonList();
-
-	if (isLoading) return <>Loading...</>;
-	if (isError) return <>Error...</>;
-
 	return (
 		<>
-			<pre>{JSON.stringify(data, null, 2)}</pre>
+			<PokemonList className='mt-4 mt-sm-3' />
 		</>
 	);
 };

@@ -1,5 +1,5 @@
 enum apiUrl {
-	POKEMON_LIST = '/',
+	POKEMON_LIST = '',
 }
 
 export default apiUrl;
