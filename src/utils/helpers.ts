@@ -10,6 +10,11 @@ export function generateRandomArray(length: number, min = 100, max = 1000): numb
 	return Array.from({ length }, () => getRandomNumber(min, max));
 }
 
+export function generateMultiples(n: number = 1, limit: number = 0): number[] {
+	if (limit === 0) return [];
+	return Array.from({ length: limit }, (_, i) => i * n);
+}
+
 export function toProperCase(str: string): string {
 	return str
 		.split(' ') // Separate words

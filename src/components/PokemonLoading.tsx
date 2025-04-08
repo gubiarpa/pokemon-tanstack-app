@@ -1,9 +1,16 @@
 import { Card, Placeholder, PlaceholderButton } from 'react-bootstrap';
 import { generateRandomArray } from '../utils/helpers';
+import { WithClassName, WithStyle } from '../types/common';
 
-export const PokemonLoading = () => {
+interface Props extends WithClassName, WithStyle {}
+
+export const PokemonLoading = ({ className }: Props) => {
 	return (
-		<Card style={{ width: '10rem' }}>
+		<>
+			<Card.Img
+				variant='top'
+				className={`${className} p-2`}
+			/>
 			<Card.Body>
 				<Placeholder
 					as={Card.Title}
@@ -25,8 +32,9 @@ export const PokemonLoading = () => {
 				<PlaceholderButton
 					variant='outline-secondary'
 					xs={6}
+					className='mt-2'
 				/>
 			</Card.Body>
-		</Card>
+		</>
 	);
 };

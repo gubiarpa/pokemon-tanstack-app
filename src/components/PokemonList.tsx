@@ -7,21 +7,22 @@ interface Props extends WithClassName {
 	limit: number;
 }
 
-export const PokemonList = ({ className, offset, limit }: Props) => {
+export const PokemonList = ({ className, offset, limit = Number(import.meta.env.VITE_POKEMON_LIST_LIMIT) }: Props) => {
 	const { isLoading, isError, data: pokemonList } = usePokemonList(offset, limit);
 
 	if (isLoading) return <>Loading...</>;
 	if (isError) return <>Error...</>;
 
 	return (
-		<div className={`d-flex flex-wrap justify-content-center gap-3 ${className}`}>
+		<>
 			{pokemonList!.results.map((pokemon) => (
 				<PokemonItem
 					key={pokemon.name}
-					className={'gubiarpa'}
-					pokemon={pokemon}
+					style={{ height: '28rem' }}
+					className={className}
+					pokemonItemResponse={pokemon}
 				/>
 			))}
-		</div>
+		</>
 	);
 };

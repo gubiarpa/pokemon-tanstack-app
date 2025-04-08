@@ -1,49 +1,26 @@
-import { Badge, Button, Card } from 'react-bootstrap';
-import { WithClassName } from '../types/common';
+import { WithClassName, WithStyle } from '../types/common';
 import { PokemonItemResponse } from '../types';
 import { usePokemon } from '../hooks/pokemon-list';
+import { Card } from 'react-bootstrap';
 import { PokemonLoading } from './PokemonLoading';
-import { toProperCase } from '../utils/helpers';
+import { PokemonCard } from './PokemonCard';
 
-interface Props extends WithClassName {
-	pokemon: PokemonItemResponse;
+interface Props extends WithClassName, WithStyle {
+	pokemonItemResponse: PokemonItemResponse;
 }
 
-export const PokemonItem = ({ className, pokemon }: Props) => {
-	const { url } = pokemon;
-	const { isLoading, isError, data: pokemonItem } = usePokemon(url);
+export const PokemonItem = ({ pokemonItemResponse }: Props) => {
+	const { url } = pokemonItemResponse;
+	const { isLoading, isError, data: pokemon } = usePokemon(url);
 
-	if (isLoading) return <PokemonLoading />;
 	if (isError) return <>Error...</>;
-	if (!pokemonItem) return <>No data...</>;
 
 	return (
 		<Card
-			style={{ width: '10rem' }}
-			className={`d-flex flex-column ${className}`}
+			className={`d-flex flex-column`}
+			style={{ width: '18rem' }}
 		>
-			<Card.Img
-				variant='top'
-				className='p-2'
-				src={pokemonItem.sprites?.other?.dream_world?.front_default}
-				title={toProperCase(pokemonItem.name)}
-				alt={toProperCase(pokemonItem.name)}
-				height={'150px'}
-			/>
-			<Card.Body>
-				<Card.Title>{toProperCase(pokemonItem.name)}</Card.Title>
-				<Card.Text className='d-flex flex-wrap gap-1'>
-					{pokemonItem.types.map(({ type }) => (
-						<Badge
-							key={type.name}
-							bg='secondary'
-						>
-							{type.name}
-						</Badge>
-					))}
-				</Card.Text>
-				<Button variant='outline-secondary'>See details</Button>
-			</Card.Body>
+			{isLoading && !pokemon ? <PokemonLoading style={{ width: '18rem' }} /> : <PokemonCard pokemon={pokemon!} />}
 		</Card>
 	);
 };
